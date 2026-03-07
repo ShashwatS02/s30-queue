@@ -1,0 +1,16 @@
+{
+  "name": "s30-queue",
+  "private": true,
+  "workspaces": [
+    "api",
+    "worker",
+    "web",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w api",
+    "dev:worker": "npm run dev -w worker",
+    "dev:web": "npm run dev -w web",
+    "build": "npm run build -ws"
+  }
+}
