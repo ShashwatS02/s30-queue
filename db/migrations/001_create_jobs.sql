@@ -40,3 +40,19 @@ create index if not exists idx_jobs_job_type
 
 create index if not exists idx_jobs_created_at
   on jobs (created_at desc);
+
+
+create or replace function set_updated_at()
+returns trigger as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$ language plpgsql;
+
+drop trigger if exists trg_jobs_updated_at on jobs;
+
+create trigger trg_jobs_updated_at
+before update on jobs
+for each row
+execute function set_updated_at();
