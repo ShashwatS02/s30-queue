@@ -10,7 +10,7 @@ A production-style full-stack background job queue system built as Project 2 of 
 
 ## 🚀 Live Demo
 
-Frontend: https://s30-queue-web.vercel.app/
+Frontend: https://s30-queue-web.vercel.app
 Backend Health: https://s30-queue-api.onrender.com/health
 ---
 
