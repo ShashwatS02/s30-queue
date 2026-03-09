@@ -1,0 +1,144 @@
+s30-queue-demo-flow.txt
+
+s30-queue - Project 2 Demo Flow
+
+Goal
+Show the core value of the project in a short, practical flow: create work, process work, handle failure, retry, cancel, and inspect worker health.
+
+Recommended demo length
+5 to 7 minutes
+
+Before you start
+1. Start the backend
+2. Start the frontend
+3. Start the worker
+4. Make sure the database is connected
+5. Open the dashboard in the browser
+6. Keep one terminal visible if possible to show worker logs
+
+Suggested demo order
+
+1. Start with the dashboard overview
+- Show queue summary cards
+- Show recent tasks table
+- Show worker health section
+- Show task details panel
+- Mention that the app tracks pending, processing, completed, failed, dead-letter, and cancelled states
+
+2. Create a normal task
+- Open the create task section
+- Select send_email_mock or another success-style job
+- Submit the task
+- Show the success banner
+- Point out that the task appears in recent tasks
+- Click the task row to open details
+- Show payload, timestamps, and status badge
+
+What this demonstrates
+- API-driven job creation
+- Database-backed queue state
+- Dashboard refresh and inspection flow
+
+3. Show worker processing
+- Wait for the worker to pick up the job
+- Show the task move from pending to processing to completed
+- Open the task details panel and show the timeline cards changing
+- Optionally show the worker card and heartbeat freshness
+
+What this demonstrates
+- Background processing
+- Worker claiming logic
+- Status tracking in the UI
+
+4. Show a failure scenario
+- Create an always_fail_mock task
+- Let it fail enough times to move toward dead-letter
+- Use filters or the needs-attention section to find it
+- Open task details and show attempts and last_error
+
+What this demonstrates
+- Retry metadata
+- Failure visibility
+- Dead-letter handling for exhausted retries
+
+5. Show manual retry
+- Click Retry on a failed or dead-letter task
+- Show the success banner
+- Show the task return to pending
+- If useful, explain that retry clears failure fields and reschedules the task
+
+What this demonstrates
+- Operator control from the dashboard
+- Recovery flow for failed jobs
+
+6. Show manual cancel
+- Create a new pending task
+- Before the worker picks it up, click Cancel
+- Show the confirmation dialog
+- First click Keep task to show safe cancellation flow
+- Re-open cancel and confirm it
+- Show the task status changing to cancelled
+
+What this demonstrates
+- Destructive action protection
+- Operator control over queued work
+- Correct restriction that only pending work can be cancelled
+
+7. Show filtering and search
+- Use quick filters like Waiting, Completed, and Needs attention
+- Search by task id prefix or task type
+- Show that the table narrows down without leaving the dashboard
+
+What this demonstrates
+- Practical operator usability
+- Faster inspection in a growing queue
+
+8. Show worker health
+- Open the background processor section
+- Point out current worker state, heartbeat age, and last claimed job
+- If any worker is stale or unhealthy, show the warning banner
+
+What this demonstrates
+- Monitoring beyond just jobs
+- Basic operational visibility
+
+Best tasks to use in demo
+- send_email_mock for normal success flow
+- flaky_mock for retry-then-success flow
+- always_fail_mock for dead-letter / needs-attention flow
+
+Backup plan if live timing is awkward
+- Pre-create one completed task
+- Pre-create one dead-letter task
+- Pre-create one pending task ready for cancel
+- Then use the live demo only for one or two transitions
+
+Final quick checklist
+- Backend running
+- Frontend running
+- Worker running
+- Database connected
+- Dashboard loads without errors
+- One success-type task ready
+- One failure-type task ready
+- One pending task ready for cancel
+- Search and filters working
+- Retry button working
+- Cancel confirmation working
+
+Common issues to avoid before demo
+- Worker not running, tasks stay pending forever
+- Wrong API base URL, dashboard fails to load
+- Database not connected, create task fails
+- No seeded failure case, dead-letter flow cannot be shown
+- Waiting too long for a live state transition instead of preparing backup tasks
+
+Optional 60-second version
+1. Show dashboard and worker health
+2. Create a task and inspect it
+3. Retry a failed task
+4. Cancel a pending task with confirmation
+5. Show dead-letter section
+
+Outcome
+By the end of this flow, the project clearly shows async processing, worker execution, retries, dead-letter handling, dashboard monitoring, and operator controls in one coherent system.
